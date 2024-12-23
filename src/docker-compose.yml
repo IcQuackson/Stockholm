@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  linux:
+    container_name: linux
+    volumes:
+      - ./workspace:/workspace
+      - ./stockholm:/stockholm
+    environment:
+      - DEBIAN_FRONTEND=noninteractive
+    stdin_open: true
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile

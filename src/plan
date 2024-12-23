@@ -1,0 +1,20 @@
+run command -[h|v|r|s] {key}
+
+h help
+v show version of program ?
+
+The program must show each encrypted file during the process
+
+s silence program output
+
+r reverse infection
+
+key to lock and unlock files. 16 chars long
+
+infect all files in /home/infection
+
+encrypt them
+
+write read me. 50 line smax
+
+have makefile n root
