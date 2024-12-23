@@ -3,8 +3,8 @@ services:
   linux:
     container_name: linux
     volumes:
-      - ./workspace:/workspace
-      - ./stockholm:/stockholm
+      - ./script:/stockholm
+    working_dir: /stockholm
     environment:
       - DEBIAN_FRONTEND=noninteractive
     stdin_open: true
