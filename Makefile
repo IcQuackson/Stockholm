@@ -16,3 +16,15 @@ clean:
 
 connect:
 	sudo docker exec -it $(CONTAINER_NAME) bash
+
+encrypt:
+	sudo docker exec -it $(CONTAINER_NAME) bash -c "python3 main.py $(key)"
+
+decrypt:
+	sudo docker exec -it $(CONTAINER_NAME) bash -c "python3 main.py -r $(key)"
+
+encrypt_silent:
+	sudo docker exec -it $(CONTAINER_NAME) bash -c "python3 main.py $(key) -s"
+
+decrypt_silent:
+	sudo docker exec -it $(CONTAINER_NAME) bash -c "python3 main.py -r $(key) -s"
