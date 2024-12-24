@@ -4,6 +4,7 @@ services:
     container_name: linux
     volumes:
       - ./script:/stockholm
+      - ./script/resources/infection:/home/infection
     working_dir: /stockholm
     environment:
       - DEBIAN_FRONTEND=noninteractive
